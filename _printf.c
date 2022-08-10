@@ -8,7 +8,7 @@ int _ADDRESS_PR(char *arg)
 
 	c = malloc((strlen(arg) + 2) * sizeof(char));
 	printf("%du", sizeof(arg));
-	for(j = 0 ; j < sizeof(arg) ; j++)
+	for (j = 0 ; j < sizeof(arg) ; j++)
 	{
 		write(1, &arg[j], 1);
 		count++;
@@ -18,7 +18,7 @@ int _SINT_PR(int arg)
 {
 	unsigned int l = 0;
 	int count = 1, i = 0;
-	int q = 0 , r = 0;
+	int q = 0, r = 0;
 
 	if (arg < 0)
 	{
@@ -32,7 +32,7 @@ int _SINT_PR(int arg)
 		arg /= 10;
 	}
 	arg = q;
-	while(arg != 0)
+	while (arg != 0)
 	{
 		r = (arg % 10) + '0';
 		arg = arg / 10;
@@ -44,11 +44,11 @@ int _OCTAL_PR(unsigned long arg)
 {
 	unsigned int l = 0;
 	int count = 1, i = 0;
-	unsigned long p = 0 ,q = 0, t, r;
+	unsigned long p = 0, q = 0, t, r;
 
 	t = ULONG_MAX;
 	q = arg;
-	while(q != 0)
+	while (q != 0)
 	{
 		if (q == 1)
 			r = 1;
@@ -62,7 +62,7 @@ int _OCTAL_PR(unsigned long arg)
 	printf("%d\n%d\n\n", p, t);
 	p = t - 1 - p;
 	t = t / 10;
-	while(p != 0)
+	while (p != 0)
 	{
 		q = (p / t);
 		p = p % t;
@@ -77,10 +77,10 @@ int _OCTAL_PR(unsigned long arg)
 
 int _BYTE_PR(int arg)
 {
-	unsigned int count, q = 0 ,p = 0 , r, t = 1;
-	
+	unsigned int count, q = 0, p = 0, r, t = 1;
+
 	q = arg;
-	while(q != 0)
+	while (q != 0)
 	{
 		if (q == 1)
 			r = 1;
@@ -92,7 +92,7 @@ int _BYTE_PR(int arg)
 	}
 	p = t - 1 - p;
 	t = t / 10;
-	while(p != 0)
+	while (p != 0)
 	{
 		q = (p / t);
 		p = p % t;
@@ -108,10 +108,10 @@ int _BYTE_PR(int arg)
 int _UNSTRING_PR(char *arg)
 {
 	unsigned int l;
-	int count = 1, i,j;
+	int count = 1, i, j;
 	int a = 0, c = 0, q = 0, r = 0;
 
-	for(j = 0 ; j < strlen(arg); j++)
+	for (j = 0 ; j < strlen(arg); j++)
 	{
 		c = (int)arg[j];
 		if ((c > 0 && c < 32) || c >= 127)
@@ -135,20 +135,20 @@ int _CHAR_PR(char ar)
 
 int _hex_PR(unsigned int arg)
 {
-	unsigned int j = 0, q = 0 ,count ,p = 0 , t = 1;
+	unsigned int j = 0, q = 0,count ,p = 0, t = 1;
 	int r, i = 0;
 	char tmp;
 	char *c;
 
 	c = malloc((log10(arg) + 2) * sizeof(char));
 	q = arg;
-	while(q != 0)
+	while (q != 0)
 	{
 		if (q == 1)
 			r = 1;
 		else
 			r = (q % 16);
-		switch(r)
+		switch (r)
 		{
 			case 10:
 				c[i] = 'a';
@@ -177,7 +177,7 @@ int _hex_PR(unsigned int arg)
 		i++;
 	}
 	i--;
-	for(; i >= 0 ; i--)
+	for (; i >= 0 ; i--)
 	{
 		write(1, &c[i], 1);
 	}
@@ -187,7 +187,7 @@ int _UINT_PR(unsigned int arg)
 {
 	unsigned int l = 0;
 	int count = 0, i = 0;
-	int q = 0 , r = 0;
+	int q = 0, r = 0;
 
 	while (arg != 0)
 	{
@@ -196,7 +196,7 @@ int _UINT_PR(unsigned int arg)
 		arg /= 10;
 	}
 	arg = q;
-	while(arg != 0)
+	while (arg != 0)
 	{
 		r = (arg % 10) + '0';
 		arg = arg / 10;
@@ -205,12 +205,12 @@ int _UINT_PR(unsigned int arg)
 	}
 }
 
-int _STRING_PR(char * arg)
+int _STRING_PR(char *arg)
 {
 	unsigned int l;
 	int count = 1, i, j;
 
-	for(j = 0 ; j < strlen(arg) ; j++)
+	for (j = 0 ; j < strlen(arg) ; j++)
 	{
 		write(1, &arg[j], 1);
 		count++;
@@ -219,20 +219,20 @@ int _STRING_PR(char * arg)
 
 int _HEX_PR(unsigned int arg)
 {
-	unsigned int ar ,q = 0 ,p = 0 ,t = 1;
+	unsigned int ar, q = 0, p = 0, t = 1;
 	int r, i;
 	char tmp;
 	char *c;
 
 	c = malloc((log10(arg) + 2) * sizeof(char));
 	q = arg;
-	while(q != 0)
+	while (q != 0)
 	{
 		if (q == 1)
 			r = 1;
 		else
 			r = (q % 16);
-		switch(r)
+		switch (r)
 		{
 			case 10:
 				c[i] = 'A';
