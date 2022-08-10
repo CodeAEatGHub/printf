@@ -5,12 +5,12 @@
  * _UINT_PR - Prints value
  *
  * @arg: The value to be printed
+ * @count: Number of charcters printed
  *
  * Return: Success
  */
-int _UINT_PR(unsigned int arg)
+int _UINT_PR(unsigned int arg, int count)
 {
-	int count = 0;
 	int q = 0, r = 0;
 
 	while (arg != 0)
@@ -27,37 +27,38 @@ int _UINT_PR(unsigned int arg)
 		write(1, &r, 1);
 		count++;
 	}
-	return (0);
+	return (count);
 }
 /**
  * _STRING_PR - Prints unprintable strings
  *
  * @arg: Input string
+ * @count: Number of characters printed
  *
  * Return:Success
  */
-int _STRING_PR(char *arg)
+int _STRING_PR(char *arg, int count)
 {
 	unsigned int j;
-	int count = 1;
 
 	for (j = 0 ; j < strlen(arg) ; j++)
 	{
 		write(1, &arg[j], 1);
 		count++;
 	}
-	return (0);
+	return (count);
 }
 /**
  * _HEX_PR - Prints value
  *
  * @arg: The value to be printed
+ * @count: Number of charcters printed
  *
  * Return: Success
  */
-int _HEX_PR(unsigned int arg)
+int _HEX_PR(unsigned int arg, int count)
 {
-	unsigned int q = 0, p = 0, t = 1, count = 1;
+	unsigned int q = 0, p = 0, t = 1;
 	int r, i;
 	char *c;
 
@@ -93,5 +94,5 @@ int _HEX_PR(unsigned int arg)
 		write(1, &c[i], 1);
 		count++;
 	}
-	return (0);
+	return (count);
 }

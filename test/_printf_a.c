@@ -8,10 +8,9 @@
  *
  * Return: Success
  */
-int _ADDRESS_PR(char *arg)
+int _ADDRESS_PR(char *arg, int count)
 {
 	unsigned int j;
-	int count;
 
 	printf("%ld", sizeof(arg));
 	for (j = 0 ; j < sizeof(arg) ; j++)
@@ -19,7 +18,7 @@ int _ADDRESS_PR(char *arg)
 		write(1, &arg[j], 1);
 		count++;
 	}
-	return (0);
+	return (count);
 }
 /**
  * _SINT_PR - Prints value
@@ -28,15 +27,15 @@ int _ADDRESS_PR(char *arg)
  *
  * Return: Success
  */
-int _SINT_PR(int arg)
+int _SINT_PR(int arg, int count)
 {
-	int count = 1;
 	int q = 0, r = 0;
 
 	if (arg < 0)
 	{
 		arg = -1 * arg;
 		write(1, "-", 1);
+		count++;
 	}
 	while (arg != 0)
 	{
@@ -52,7 +51,7 @@ int _SINT_PR(int arg)
 		write(1, &r, 1);
 		count++;
 	}
-	return (0);
+	return (count);
 }
 /**
  * _OCTAL_PR - Prints value
@@ -61,39 +60,34 @@ int _SINT_PR(int arg)
  *
  * Return: Success
  */
-int _OCTAL_PR(unsigned long arg)
+int _OCTAL_PR(unsigned long arg, int count)
 {
-	int count = 1;
-	unsigned long p = 0, q = 0, t, r;
+	int i = 0;
+	unsigned long p = 0, q = 0, t = 1, r;
+	unsigned long *oct;
 
-	t = 1;
+	oct = malloc((numdigits(arg) + 2) * sizeof(unsigned long));
 	q = arg;
 	while (q != 0)
 	{
 		if (q == 1)
-			r = 1;
+			r = q;
 		else
 			r = (q % 8);
-	t = t * 10;
-	p = p + ((t / 10) * r);
-	q = q / 8;
-	printf("%lu\n%lu\n%ld\n%lu\n", arg, p, r, (unsigned long)t);
+		oct[i] = r + '0';
+		t = t * 10;
+		p = p + ((t / 10) * r);
+		q = q / 8;
+		i++;
 	}
-	printf("%ld\n%ld\n\n", p, t);
-	p = t - 1 - p;
-	t = t / 10;
-	while (p != 0)
+	i--;
+	for (; i >= 0 ; i--))
 	{
-		q = (p / t);
-		p = p % t;
-		t = t / 10;
-		if (q == 9)
-			write(1, "0", 1);
-		else
-			write(1, "1", 1);
-	count++;
+		write(1, &oct[i], 1);
+		count++;
 	}
-	return (0);
+	free(oct);
+	return (count);
 }
 /**
  * _printf - Prints value
@@ -135,25 +129,25 @@ int _printf(const char *format, ...)
 			else if (format[i - 1] == '%' && isalnum(format[i]))
 			{
 				if (format[i] == 'c')
-					_CHAR_PR(va_arg(ap, int));
+					count = _CHAR_PR(va_arg(ap, int), count);
 				else if (format[i] == 's')
-					_STRING_PR(va_arg(ap, char *));
+					count = _STRING_PR(va_arg(ap, char *), count);
 				else if (format[i] == 'S')
-					_UNSTRING_PR(va_arg(ap, char *));
+					count = _UNSTRING_PR(va_arg(ap, char *), count);
 				else if (format[i] == 'p')
-					_ADDRESS_PR(va_arg(ap, char *));
+					count = _ADDRESS_PR(va_arg(ap, char *), count);
 				else if (format[i] == 'i' || format[i] == 'u')
-					_UINT_PR(uiarg = va_arg(ap, unsigned int));
+					count = _UINT_PR(uiarg = va_arg(ap, unsigned int), count);
 				else if (format[i] == 'b')
-					_BYTE_PR(uiarg = va_arg(ap, unsigned int));
+					count = _BYTE_PR(uiarg = va_arg(ap, unsigned int), count);
 				else if (format[i] == 'x')
-					_hex_PR(uiarg = va_arg(ap, unsigned int));
+					count = _hex_PR(uiarg = va_arg(ap, unsigned int), count);
 				else if (format[i] == 'X')
-					_HEX_PR(uiarg = va_arg(ap, unsigned int));
+					count = _HEX_PR(uiarg = va_arg(ap, unsigned int), count);
 				else if (format[i] == 'o')
-					_OCTAL_PR(uarg = va_arg(ap, unsigned int));
+					count = _OCTAL_PR(uarg = va_arg(ap, unsigned int), count);
 				else if (format[i] == 'd')
-					_SINT_PR(iarg = va_arg(ap, int));
+					count = _SINT_PR(iarg = va_arg(ap, int), count);
 			}
 			else if (format[i] != '%' && format[i] == '%')
 			{

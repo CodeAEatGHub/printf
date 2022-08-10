@@ -5,12 +5,13 @@
  * _BYTE_PR - Prints value
  *
  * @arg: The value to be printed
+ * @count: Number of charcters printed
  *
  * Return: Success
  */
-int _BYTE_PR(int arg)
+int _BYTE_PR(int arg, int count)
 {
-	unsigned int count, q = 0, p = 0, r, t = 1;
+	unsigned int q = 0, p = 0, r, t = 1;
 
 	q = arg;
 	while (q != 0)
@@ -42,12 +43,13 @@ int _BYTE_PR(int arg)
  * _UNSTRING_PR - Prints value
  *
  * @arg: The value to be printed
+ * @count: Number of characters printed
  *
  * Return: Success
  */
-int _UNSTRING_PR(char *arg)
+int _UNSTRING_PR(char *arg, int count)
 {
-	int count = 1, c = 0;
+	int c = 0;
 	unsigned int j = 0;
 
 	for (j = 0 ; j < strlen(arg); j++)
@@ -57,32 +59,40 @@ int _UNSTRING_PR(char *arg)
 		{
 			write(1, "\\", 1);
 			write(1, "x", 1);
+			count += 2;
 			if (c < 15)
+			{
 				write(1, "0", 1);
+				count++;
+			}
 			_HEX_PR(c);
 		}
 		else
+		{
 			write(1, &arg[j], 1);
-		count++;
+			count++;
+		}
 	}
-	return (0);
+	return (count);
 }
 /**
  * _CHAR_PR - Prints value
  *
  * @ar: The value to be printed
+ * @count: Number of charcters printed
  *
  * Return: Success
  */
-int _CHAR_PR(char ar)
+int _CHAR_PR(char ar, int count)
 {
 	write(1, &ar, sizeof(ar));
-	return (0);
+	return (count);
 }
 /**
  * numdigits - Returns the number of digits in a number
  *
  * @arg: The input number
+ * @count: Number of characters printed
  *
  * Return: Success
  */
@@ -101,12 +111,13 @@ unsigned int numdigits(unsigned int arg)
  * _hex_PR - Prints value
  *
  * @arg: The value to be printed
+ * @count: Number of characters printed
  *
  * Return: Success
  */
-int _hex_PR(unsigned int arg)
+int _hex_PR(unsigned int arg, int count)
 {
-	unsigned int q = arg, count = 1, p = 0, t = 1;
+	unsigned int q = arg, p = 0, t = 1;
 	int r, i = 0;
 	char *c;
 
@@ -141,5 +152,5 @@ int _hex_PR(unsigned int arg)
 		write(1, &c[i], 1);
 		count++;
 	}
-	return (0);
+	return (count);
 }
