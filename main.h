@@ -10,15 +10,16 @@
 #include <stdarg.h>
 #include <float.h>
 int _HEX_PR(unsigned int ar);
-int _ADDRESS_PR(const char *format,...);
-int _SINT_PR(const char *format,...);
+int _ADDRESS_PR(char *arg);
+int _SINT_PR(int arg);
 int _OCTAL_PR(unsigned long arg);
 int _BYTE_PR(int arg);
 int _UNSTRING_PR(char *arg);
 int _CHAR_PR(char ar);
 int _hex_PR(unsigned int arg);
-int _UINT_PR(const char *format,...);
+int _UINT_PR(unsigned int arg);
 int _STRING_PR(char * arg);
 int _HEX_PR(unsigned int arg);
 int _printf(const char *format, ...);
+int _FSPECIFIER(char ctmp, void *arg);
 #endif
