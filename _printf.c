@@ -1,5 +1,12 @@
 #include "main.h"
 
+/**
+ * _ADDRESS_PR - Prints value
+ *
+ * @arg: The value to be printed
+ *
+ * Return: Success
+ */
 int _ADDRESS_PR(char *arg)
 {
 	unsigned int l;
@@ -14,6 +21,13 @@ int _ADDRESS_PR(char *arg)
 		count++;
 	}
 }
+/**
+ * _SINT_PR - Prints value
+ *
+ * @arg: The value to be printed
+ *
+ * Return: Success
+ */
 int _SINT_PR(int arg)
 {
 	unsigned int l = 0;
@@ -40,6 +54,13 @@ int _SINT_PR(int arg)
 		count++;
 	}
 }
+/**
+ * _OCTAL_PR - Prints value
+ *
+ * @arg: The value to be printed
+ *
+ * Return: Success
+ */
 int _OCTAL_PR(unsigned long arg)
 {
 	unsigned int l = 0;
@@ -74,7 +95,13 @@ int _OCTAL_PR(unsigned long arg)
 	count++;
 	}
 }
-
+/**
+ * _BYTE_PR - Prints value
+ *
+ * @arg: The value to be printed
+ *
+ * Return: Success
+ */
 int _BYTE_PR(int arg)
 {
 	unsigned int count, q = 0, p = 0, r, t = 1;
@@ -104,7 +131,13 @@ int _BYTE_PR(int arg)
 		count++;
 	}
 }
-
+/**
+ * _UNSTRING_PR - Prints value
+ *
+ * @arg: The value to be printed
+ *
+ * Return: Success
+ */
 int _UNSTRING_PR(char *arg)
 {
 	unsigned int l;
@@ -127,15 +160,27 @@ int _UNSTRING_PR(char *arg)
 		count++;
 	}
 }
-
+/**
+ * _CHAR_PR - Prints value
+ *
+ * @arg: The value to be printed
+ *
+ * Return: Success
+ */
 int _CHAR_PR(char ar)
 {
 	write(1, &ar, sizeof(ar));
 }
-
+/**
+ * _hex_PR - Prints value
+ *
+ * @arg: The value to be printed
+ *
+ * Return: Success
+ */
 int _hex_PR(unsigned int arg)
 {
-	unsigned int j = 0, q = 0,count ,p = 0, t = 1;
+	unsigned int j = 0, q = 0, count, p = 0, t = 1;
 	int r, i = 0;
 	char tmp;
 	char *c;
@@ -182,7 +227,13 @@ int _hex_PR(unsigned int arg)
 		write(1, &c[i], 1);
 	}
 }
-
+/**
+ * _UINT_PR - Prints value
+ *
+ * @arg: The value to be printed
+ *
+ * Return: Success
+ */
 int _UINT_PR(unsigned int arg)
 {
 	unsigned int l = 0;
@@ -216,7 +267,13 @@ int _STRING_PR(char *arg)
 		count++;
 	}
 }
-
+/**
+ * _HEX_PR - Prints value
+ *
+ * @arg: The value to be printed
+ *
+ * Return: Success
+ */ 
 int _HEX_PR(unsigned int arg)
 {
 	unsigned int ar, q = 0, p = 0, t = 1;
@@ -261,13 +318,20 @@ int _HEX_PR(unsigned int arg)
 		i++;
 	}
 	i--;
-	for(; i >= 0 ; i--)
+	for (; i >= 0 ; i--)
 	{
 		write(1, &c[i], 1);
 	}
 	p = t - 1 - p;
 	t = t / 10;
 }
+/**
+ * _printf - Prints value
+ *
+ * @arg: The value to be printed
+ *
+ * Return: Success
+ */
 
 int _printf(const char *format, ...)
 {
@@ -284,7 +348,7 @@ int _printf(const char *format, ...)
 	}
 	i = 0;
 	va_start(ap, 1 - 1);
-	while(i < strlen(format))
+	while (i < strlen(format))
 	{
 		if (i == 0)
 		{
@@ -293,14 +357,14 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			if(format[i - 1] != '%' && format[i] != '%')
+			if (format[i - 1] != '%' && format[i] != '%')
 			{
 				write(1, &format[i], 1);
 				count++;
 			}
-			else if(format[i - 1] == '%' && isalnum(format[i]))
+			else if (format[i - 1] == '%' && isalnum(format[i]))
 			{
-				if(format[i] == 'c')
+				if (format[i] == 'c')
 					_CHAR_PR(va_arg(ap, int));
 				else if (format[i] == 's')
 					_STRING_PR(va_arg(ap, char *));
