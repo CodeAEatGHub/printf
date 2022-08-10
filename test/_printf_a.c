@@ -81,7 +81,7 @@ int _OCTAL_PR(unsigned long arg, int count)
 		i++;
 	}
 	i--;
-	for (; i >= 0 ; i--))
+	for (; i >= 0 ; i--)
 	{
 		write(1, &oct[i], 1);
 		count++;
@@ -117,14 +117,19 @@ int _printf(const char *format, ...)
 		if (i == 0)
 		{
 			if (format[i] != '%')
+			{
 				write(1, &format[i], 1);
+				if ((int)format[i] >= 32 && (int)format[i] < 127)
+					count++;
+			}
 		}
 		else
 		{
 			if (format[i - 1] != '%' && format[i] != '%')
 			{
 				write(1, &format[i], 1);
-				count++;
+				if ((int)format[i] >= 32 && (int)format[i] < 127)
+					count++;
 			}
 			else if (format[i - 1] == '%' && isalnum(format[i]))
 			{
@@ -151,6 +156,8 @@ int _printf(const char *format, ...)
 			}
 			else if (format[i] != '%' && format[i] == '%')
 			{
+				write(1, "%", 1);
+				count++;
 			}
 		}
 		i++;

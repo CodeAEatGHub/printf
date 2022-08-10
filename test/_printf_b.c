@@ -65,7 +65,7 @@ int _UNSTRING_PR(char *arg, int count)
 				write(1, "0", 1);
 				count++;
 			}
-			_HEX_PR(c);
+			_HEX_PR(c, count);
 		}
 		else
 		{
