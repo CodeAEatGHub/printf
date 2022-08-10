@@ -22,4 +22,5 @@ int _STRING_PR(char * arg);
 int _HEX_PR(unsigned int arg);
 int _printf(const char *format, ...);
 int _FSPECIFIER(char ctmp, void *arg);
+unsigned int numdigits(unsigned int arg);
 #endif
