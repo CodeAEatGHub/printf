@@ -20,6 +20,7 @@ int _ADDRESS_PR(char *arg)
 		write(1, &arg[j], 1);
 		count++;
 	}
+	return (0);
 }
 /**
  * _SINT_PR - Prints value
@@ -53,6 +54,7 @@ int _SINT_PR(int arg)
 		write(1, &r, 1);
 		count++;
 	}
+	return (0);
 }
 /**
  * _OCTAL_PR - Prints value
@@ -94,6 +96,7 @@ int _OCTAL_PR(unsigned long arg)
 			write(1, "1", 1);
 	count++;
 	}
+	return (0);
 }
 /**
  * _BYTE_PR - Prints value
@@ -130,6 +133,7 @@ int _BYTE_PR(int arg)
 			write(1, "1", 1);
 		count++;
 	}
+	return (0);
 }
 /**
  * _UNSTRING_PR - Prints value
@@ -159,6 +163,7 @@ int _UNSTRING_PR(char *arg)
 			write(1, &arg[j], 1);
 		count++;
 	}
+	return (0);
 }
 /**
  * _CHAR_PR - Prints value
@@ -170,6 +175,7 @@ int _UNSTRING_PR(char *arg)
 int _CHAR_PR(char ar)
 {
 	write(1, &ar, sizeof(ar));
+	return (0);
 }
 /**
  * _hex_PR - Prints value
@@ -193,29 +199,20 @@ int _hex_PR(unsigned int arg)
 			r = 1;
 		else
 			r = (q % 16);
-		switch (r)
-		{
-			case 10:
-				c[i] = 'a';
-				break;
-			case 11:
-				c[i] = 'b';
-				break;
-			case 12:
-				c[i] = 'c';
-				break;
-			case 13:
-				c[i] = 'd';
-				break;
-			case 14:
-				c[i] = 'e';
-				break;
-			case 15:
-				c[i] = 'f';
-				break;
-			default:
-				c[i] = r + '0';
-		}
+		if (r == 10)
+			c[i] = 'a';
+		else if (r == 11)
+			c[i] = 'b';
+		else if (r == 12)
+			c[i] = 'c';
+		else if (r == 13)
+			c[i] = 'd';
+		else if (r == 14)
+			c[i] = 'e';
+		else if (r == 15)
+			c[i] = 'f';
+		else
+			c[i] = r + '0';
 		t = t * 100;
 		p = p + ((t / 100) * r);
 		q = q / 16;
@@ -223,9 +220,8 @@ int _hex_PR(unsigned int arg)
 	}
 	i--;
 	for (; i >= 0 ; i--)
-	{
 		write(1, &c[i], 1);
-	}
+	return (0);
 }
 /**
  * _UINT_PR - Prints value
@@ -254,6 +250,7 @@ int _UINT_PR(unsigned int arg)
 		write(1, &r, 1);
 		count++;
 	}
+	return (0);
 }
 
 int _STRING_PR(char *arg)
@@ -266,6 +263,7 @@ int _STRING_PR(char *arg)
 		write(1, &arg[j], 1);
 		count++;
 	}
+	return (0);
 }
 /**
  * _HEX_PR - Prints value
@@ -273,7 +271,7 @@ int _STRING_PR(char *arg)
  * @arg: The value to be printed
  *
  * Return: Success
- */ 
+ */
 int _HEX_PR(unsigned int arg)
 {
 	unsigned int ar, q = 0, p = 0, t = 1;
@@ -289,29 +287,20 @@ int _HEX_PR(unsigned int arg)
 			r = 1;
 		else
 			r = (q % 16);
-		switch (r)
-		{
-			case 10:
-				c[i] = 'A';
-				break;
-			case 11:
-				c[i] = 'B';
-				break;
-			case 12:
-				c[i] = 'C';
-				break;
-			case 13:
-				c[i] = 'D';
-				break;
-			case 14:
-				c[i] = 'E';
-				break;
-			case 15:
-				c[i] = 'F';
-				break;
-			default:
-				c[i] = r + '0';
-		}
+		if (r == 10)
+			c[i] = 'A';
+		else if (r == 11)
+			c[i] = 'B';
+		else if (r == 12)
+			c[i] = 'C';
+		else if (r == 13)
+			c[i] = 'D';
+		else if (r == 14)
+			c[i] == 'E';
+		else if (r == 15)
+			c[i] = 'F';
+		else
+			c[i] = r + '0';
 		t = t * 100;
 		p = p + ((t / 100) * r);
 		q = q / 16;
@@ -319,11 +308,10 @@ int _HEX_PR(unsigned int arg)
 	}
 	i--;
 	for (; i >= 0 ; i--)
-	{
 		write(1, &c[i], 1);
-	}
 	p = t - 1 - p;
 	t = t / 10;
+	return (0);
 }
 /**
  * _printf - Prints value
